@@ -1,11 +1,16 @@
 import { Button } from "primereact/button";
 import "./index.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 import { PrimeReactProvider } from "primereact/api";
+
+import { Sidebar } from "primereact/sidebar";
+
 import {
   QueryClientProvider,
   QueryClient,
   useQuery,
 } from "@tanstack/react-query";
+import { useState } from "react";
 
 const useFetchRecipes = () => {
   return useQuery({
@@ -21,9 +26,13 @@ const queryClient = new QueryClient();
 
 const TestComponent = () => {
   const { isPending, data } = useFetchRecipes();
+  const [visible, setVisible] = useState(false);
   return (
     <>
-      <Button label="Click" />
+      <Sidebar visible={visible} onHide={() => setVisible(false)}>
+        <h2>Sidebar</h2>
+      </Sidebar>
+      <Button onClick={() => setVisible(true)}>Show sidebar</Button>
       {isPending
         ? "Loading..."
         : data?.map((recipe: unknown, index: number) => (
