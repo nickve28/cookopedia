@@ -1,6 +1,7 @@
 use axum::{http::StatusCode, Json};
 
-use crate::models::{ingredient::{Ingredient, UnitOfMeasurement}, recipe::Recipe};
+use crate::ingredient::models::{Ingredient, UnitOfMeasurement};
+use crate::recipe::models::Recipe;
 
 #[axum::debug_handler]
 pub async fn list_recipes() ->Result<Json<Vec<Recipe>>, StatusCode> {

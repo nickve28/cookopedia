@@ -1,5 +1,5 @@
 use serde::{Serialize, Deserialize};
-use crate::models::ingredient::Ingredient;
+use crate::ingredient::models::Ingredient;
 
 #[derive(Serialize, Deserialize)]
 pub struct Recipe {

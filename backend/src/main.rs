@@ -4,19 +4,13 @@ use axum::{
 };
 use dotenvy;
 
-mod models {
-    pub mod ingredient;
-    pub mod recipe;
-}
-
-mod handlers {
-    pub mod recipe;
-}
+pub mod ingredient;
+pub mod recipe;
 
 // #[dotenvy::load]
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/recipes", get(handlers::recipe::list_recipes));
+    let app = Router::new().route("/recipes", get(crate::recipe::handlers::list_recipes));
     dotenvy::dotenv().ok();
     let port = std::env::var("PORT").unwrap();
     let address = std::env::var("HOST").unwrap();
